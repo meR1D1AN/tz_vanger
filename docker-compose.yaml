@@ -1,0 +1,50 @@
+services:
+  db:
+    image: mysql:8.1
+    restart: unless-stopped
+    container_name: vanger_db
+    env_file:
+      - .env
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_PORT}"
+    volumes:
+      - vanger_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u ${MYSQL_USER} -p${MYSQL_PASSWORD}"]
+      interval: 5s
+      retries: 5
+      timeout: 5s
+      start_period: 22s
+    networks:
+      - vanger
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vanger_app
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - vanger_static:/app/static
+      - vanger_media:/app/media
+    env_file:
+      - .env
+    command: >
+      sh -c "uv run python3 manage.py collectstatic --noinput &&
+             uv run python3 manage.py migrate &&
+             uv run python3 manage.py csu &&
+             uv run python3 manage.py runserver 0.0.0.0:${APP_PORT}"
+    networks:
+      - vanger
+
+volumes:
+  vanger_mysql_data:
+  vanger_static:
+  vanger_media:
+
+networks:
+  vanger:

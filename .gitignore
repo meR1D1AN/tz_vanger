@@ -12,9 +12,6 @@ static/admin
 */__pycache__/
 env
 .env
-/media
-node_modules
-postgres_data
 .vscode/
 .coverage
 db.sqlite3

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="hero bg-hero-custom py-5">
+    <div class="container py-5 overflow-hidden">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-12 px-4" style="max-width: 751px;">
+              <h1 class="hero__title mb-3">Космическое агентство</h1>
+              <p class="hero__description mb-5">Национальное управление по аэронавтике и исследованию космического пространства — ведомство, относящееся к федеральному правительству США и подчиняющееся непосредственно президенту США.</p>
+            </div>
+        </div>
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 order-last order-lg-first">
+                <img src="{% static 'gallery/images/earth.jpg' %}" alt="Земля из космоса" class="img-fluid rounded-3 shadow-lg">
+            </div>
+            <div class="col-lg-6">
+                <div class="row row-cols-2 g-4">
+                    <div class="col">
+                        <div class="feature-item">
+                            <img src="{% static 'svg/shuttle.svg' %}" class="mb-3">
+                            <p class="feature-item__text">Спейс шаттлы — пилотируемые корабли</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="feature-item">
+                            <img src="{% static 'svg/telescope.svg' %}" class="mb-3">
+                            <p class="feature-item__text">Лучшее телескопическое оборудование</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="feature-item">
+                            <img src="{% static 'svg/moon.svg' %}" class="mb-3">
+                            <p class="feature-item__text">Исследовательские станции на Луне — шаг к новым открытиям!</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="feature-item">
+                            <img src="{% static 'svg/medal.svg' %}" class="mb-3">
+                            <p class="feature-item__text">Золотая медаль по научным исследованиям</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="photos" class="gallery-section bg-gallery-custom py-5">
+    <div class="container py-5">
+        <h2 class="text-center fw-bold mb-5 display-5">Фотографии</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="slider-main mb-4">
+                    {% for slide in slides %}
+                        <div>
+                            <a href="{{ slide.image.url }}" data-fancybox="gallery" data-caption="{{ slide.title }}">
+                                <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="img-fluid">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="slider-nav px-2">
+                    {% for slide in slides %}
+                        <div>
+                            <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="img-fluid">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
