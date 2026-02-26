@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -19,11 +18,32 @@ class Migration(migrations.Migration):
             name='SlideItem',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(help_text='Короткое название или подпись к изображению', max_length=250, verbose_name='Название изображения')),
-                ('order', models.PositiveIntegerField(default=0, help_text='Чем меньше цифра, тем выше слайд в списке', verbose_name='Порядок')),
+                (
+                    'title',
+                    models.CharField(
+                        help_text='Короткое название или подпись к изображению',
+                        max_length=250,
+                        verbose_name='Название изображения',
+                    ),
+                ),
+                (
+                    'order',
+                    models.PositiveIntegerField(
+                        default=0, help_text='Чем меньше цифра, тем выше слайд в списке', verbose_name='Порядок'
+                    ),
+                ),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
                 ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Дата обновления')),
-                ('image', filer.fields.image.FilerImageField(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='slide_items', to=settings.FILER_IMAGE_MODEL, verbose_name='Изображение')),
+                (
+                    'image',
+                    filer.fields.image.FilerImageField(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name='slide_items',
+                        to=settings.FILER_IMAGE_MODEL,
+                        verbose_name='Изображение',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'Элемент слайдера',

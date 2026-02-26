@@ -73,7 +73,7 @@ DATABASES = {
             'use_unicode': True,
             'sql_mode': 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION',
             'autocommit': True,
-        }
+        },
     }
 }
 
@@ -120,4 +120,3 @@ CSRF_TRUSTED_ORIGINS = [
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10_240_000
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10_240_000
-
